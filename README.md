@@ -25,7 +25,7 @@ Configure the root of your repository with the following files and directories. 
 * **lib/** - contains module definitions
 * **model/** - contains module definitions
 * **route/** - contains module definitions
-* **\_\_test\_\_/** - contains unit tests
+* **\_\_test\_\_/** - contains test modules
 
 ## Feature Tasks  
 For this assignment you will be building a RESTful HTTP server. The server will store all resources in memory.
