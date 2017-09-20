@@ -1,0 +1,21 @@
+{
+  "name": "lab-ron",
+  "version": "0.0.1",
+  "description": "Lab 08 and 09 of Code Fellows",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test-watch": "jest --watch -i",
+    "test": "jest -i -coverage"
+  },
+  "author": "ronbarrantes@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.7.1",
+    "jest": "^21.1.0",
+    "dotenv": "^4.0.0",
+    "superagent": "^3.6.0"
+  }
+}
