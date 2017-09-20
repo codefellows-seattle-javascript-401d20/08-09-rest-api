@@ -53,8 +53,7 @@ Create the following routes for performing CRUD opperations on your resourcee
   * on failure due to a resouce with that id not existing respond with a 404 status code
 
 ## Tests
-* write a test to ensure that your api returns a status code of 404 for routes that have not been registered
-* write tests to ensure the `/api/resource-name` endpoint responds as described for each condition below:
+* Write tests to ensure the `/api/resource-name` endpoint responds as described for each condition below:
   * `GET`: test 404, it should respond with 'not found' for valid requests made with an id that was not found
   * `GET`: test 200, it should contain a response body for a request made with a valid id
   * `POST`: test 400, it should respond with 'bad request' if no request body was provided or the body was invalid
