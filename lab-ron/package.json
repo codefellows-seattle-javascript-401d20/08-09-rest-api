@@ -14,8 +14,11 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^4.7.1",
-    "jest": "^21.1.0",
+    "jest": "^21.1.0"
+  },
+  "dependencies": {
     "dotenv": "^4.0.0",
-    "superagent": "^3.6.0"
+    "superagent": "^3.6.0",
+    "uuid": "^3.1.0"
   }
 }
