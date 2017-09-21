@@ -3,7 +3,7 @@
 const Book = require('../model/book.js');
 const router = require('../lib/router.js');
 
-// store data while the server is running
+// store data while the server runs
 let books = [];
 
 let sendStatus = (res, status, message) => {
@@ -19,10 +19,6 @@ let sendJSON = (res, status, data) => {
   res.end(JSON.stringify(data));
 };
 
-// POST /api/<resource-name>
-// pass data as stringifed JSON in the body of a POST request to create a new resource
-// on failure due to a bad request send a 400 status code
-//  on success respond with a 200 status code and the created book
 router.post('/api/books', (req, res) => {
   if(!req.body.title)
     return sendStatus(res, 400, 'no title found');
@@ -36,10 +32,6 @@ router.post('/api/books', (req, res) => {
   sendJSON(res, 200, book);
 });
 
-// GET /api/<resource-name> and GET /api/<resource-name>?id={id}
-// with no id in the query string it should respond with an array of all of your resources
-// with an id in the query string it should respond with the details of a specifc resource (as JSON)
-// if the id is not found respond with a 404
 router.get('/api/books', (req, res) => {
   if(req.url.query.id){
     let newBook = books.find(book => book.id === req.url.query.id);
@@ -53,25 +45,16 @@ router.get('/api/books', (req, res) => {
   sendJSON(res, 200, books);
 });
 
-// DELETE /api/<resource-name?id={id}>
-// the route should delete a note with the given id
-// on success this should return a 204 status code with no content in the body
-// on failure due to lack of id in the query respond with a 400 status code
-// on failure due to a resouce with that id not existing respond with a 404 status code
 router.delete('/api/books', (req, res) => {
   if(req.url.query.id){
     let index = books.indexof(req.url.query.id);
-    // the route should delete a note with the given id
     books.splice(index, index);
-    // on success this should return a 204 status code with no content in the body
     if(!books.indexof(req.url.query.id)){
       return sendStatus(res, 204, 'no body found');
     }
   }
-  // on failure due to lack of id in the query respond with a 400 status code
   if(!req.url.query.id){
     sendStatus(res, 400, 'no ID found');
   }
-  // on failure due to a resouce with that id not existing respond with a 404 status code
   return sendStatus(res, 404, 'no body found');
 });
