@@ -42,7 +42,7 @@ router.post('/api/books', (req, res) => {
 // if the id is not found respond with a 404
 router.get('/api/books', (req, res) => {
   if(req.url.query.id){
-    let newBook = newbooks.find(book => book.id === req.url.query.id);
+    let newBook = books.find(book => book.id === req.url.query.id);
     if(newBook){
       sendJSON(res, 200, newBook);
     }
