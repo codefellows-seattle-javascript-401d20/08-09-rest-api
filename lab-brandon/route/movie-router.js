@@ -31,6 +31,22 @@ router.post('/api/movies', (req, res) => {
   movies.push(movie);
   sendJSON(res, 200, movie);
 });
+// POST /api/<resource-name>
+// pass data as stringifed JSON in the body of a POST request to create a new resource
+// on success respond with a 200 status code and the created note
+// on failure due to a bad request send a 400 status code
 
-router.get('/api/moviess', (req, res) => {
-})
+router.get('/api/movies', (req, res) => {
+  if(req.url.query) {
+    let moviesSearched = movies.find(movie => movie.id === req.url.query);
+    return moviesSearched ? sendJSON(res, 200, moviesSearched) : sendStatus(res, 404, 'selection did not match the movie');
+  }
+  return sendJSON(res, 200, movies);
+});
+router.delete('/api/movies', (req, res) => {
+  if(req.url.query) {
+    let moviesSearched = movies.find(movie => movie.id === req.url.query);
+    return moviesSearched ? sendJSON(res, 200, moviesSearched) : sendStatus(res, 404, 'selection did not match the movie');
+  }
+  return sendJSON(res, 200, movies);
+});

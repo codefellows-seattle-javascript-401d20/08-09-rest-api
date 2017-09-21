@@ -16,13 +16,15 @@ describe('/api/movies', ()=> {
       return superagent.post('http://localhost:7000/api/movies')
       .set('Content-Type', 'application/json')
       .send({
-        title: 'brandon',
-        content: 'is awesome',
+        title: 'Ender\'s Game',
+        author: 'Orson Scott Card',
+        mainCharacter: 'Ender',
       })
       .then(res => {
         expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual('brandon');
-        expect(res.body.content).toEqual('is cool');
+        expect(res.body.title).toEqual('Ender\'s Game');
+        expect(res.body.author).toEqual('Orson Scott Card');
+        expect(res.body.mainCharacter).toEqual('Ender');
         expect(res.body.timestamp).toBeTruthy();
         expect(res.body.id).toBeTruthy();
       });

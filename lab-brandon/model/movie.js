@@ -6,8 +6,9 @@ class Movie {
   constructor(options){
     this.id = uuid();
     this.timestamp = new Date();
-    this.title = options.title || '';
-    this.content = options.content || '';
+    this.title = options.title || 'Ender\'s Game';
+    this.author = options.author || 'Orson Scott Card';
+    this.mainCharacter = options.mainCharacter || 'Ender';
   }
 
   toString(){
