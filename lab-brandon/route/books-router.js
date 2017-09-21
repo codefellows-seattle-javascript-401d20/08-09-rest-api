@@ -1,6 +1,6 @@
 'use strict';
 
-const Movie = require('../model/movie.js');
+const Movie = require('../model/books.js');
 const router = require('../lib/router.js');
 
 // store data while the server is running
