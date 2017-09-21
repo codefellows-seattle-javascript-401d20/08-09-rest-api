@@ -42,14 +42,24 @@ router.post('/api/books', (req, res) => {
 // if the id is not found respond with a 404
 router.get('/api/books', (req, res) => {
   if(req.url.query.id){
-    if (books.find(book => book.id === req.url.query.id)){
-      let newBook = books.find(book => book.id === req.url.query.id);
+    let newBook = newbooks.find(book => book.id === req.url.query.id);
+    if(newBook){
       sendJSON(res, 200, newBook);
-    } else {
-      return sendStatus(res, 404, 'no ID found');
+    }
+    else {
+      sendStatus(res, 404, 'no ID found');
     }
   }
   return books;
+  // if(req.url.query.id){
+  //   if (books.find(book => book.id === req.url.query.id)){
+  //     let newBook = books.find(book => book.id === req.url.query.id);
+  //     sendJSON(res, 200, newBook);
+  //   } else {
+  //     return sendStatus(res, 404, 'no ID found');
+  //   }
+  // }
+  // return books;
 });
 
 // DELETE /api/<resource-name?id={id}>
@@ -57,14 +67,14 @@ router.get('/api/books', (req, res) => {
 // on success this should return a 204 status code with no content in the body
 // on failure due to lack of id in the query respond with a 400 status code
 // on failure due to a resouce with that id not existing respond with a 404 status code
-router.get('/api/books', (req, res) => {
-  if(req.url.query.id){
-    if (books.find(book => book.id === req.url.query.id)){
-      let newBook = books.find(book => book.id === req.url.query.id);
-      sendJSON(res, 200, newBook);
-    } else {
-      return sendStatus(res, 404, 'no ID found');
-    }
-  }
-  return books;
-});
+// router.get('/api/books', (req, res) => {
+//   if(req.url.query.id){
+//     if (books.find(book => book.id === req.url.query.id)){
+//       let newBook = books.find(book => book.id === req.url.query.id);
+//       sendJSON(res, 200, newBook);
+//     } else {
+//       return sendStatus(res, 404, 'no ID found');
+//     }
+//   }
+//   return books;
+// });
