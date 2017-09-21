@@ -1,10 +1,10 @@
 'use strict';
 
-const Note = require('../model/note.js');
+const Movie = require('../model/movie.js');
 const router = require('../lib/router.js');
 
 // store data while the server is running
-let notes = [];
+let movies = [];
 
 let sendStatus = (res, status, message) => {
   console.error('__REQUESTS_ERROR__', message);
@@ -19,7 +19,7 @@ let sendJSON = (res, status, data) => {
   res.end(JSON.stringify(data));
 };
 
-router.post('/api/notes', (req, res) => {
+router.post('/api/movies', (req, res) => {
   if(!req.body)
     return sendStatus(res, 400, 'no body found');
   if(!req.body.title)
@@ -27,10 +27,10 @@ router.post('/api/notes', (req, res) => {
   if(!req.body.content)
     return sendStatus(res, 400, 'no content found');
 
-  let note = new Note(req.body);
-  notes.push(note);
-  sendJSON(res, 200, note);
+  let movie = new Movie(req.body);
+  movies.push(movie);
+  sendJSON(res, 200, movie);
 });
 
-router.get('/api/notes', (req, res) => {
+router.get('/api/moviess', (req, res) => {
 })

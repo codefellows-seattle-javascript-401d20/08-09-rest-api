@@ -2,17 +2,18 @@
 
 // mock env
 process.env.PORT = 4000;
+require('dotenv').config();
 
 const server = require('../lib/server.js');
 const superagent = require('superagent');
 
-describe('/api/notes', ()=> {
+describe('/api/movies', ()=> {
   afterAll(server.stop);
   beforeAll(server.start);
 
-  describe('POST /api/notes', () => {
+  describe('POST /api/movies', () => {
     test('should respond with a 200', () => {
-      return superagent.post('http://localhost:7000/api/notes')
+      return superagent.post('http://localhost:7000/api/movies')
       .set('Content-Type', 'application/json')
       .send({
         title: 'brandon',
@@ -28,7 +29,7 @@ describe('/api/notes', ()=> {
     });
 
     test('should resoind with a 400', () => {
-      return superagent.post('http://localhost:7000/api/notes')
+      return superagent.post('http://localhost:7000/api/movies')
       .set('Content-Type', 'application/json')
       .send({
         content: 'cool beans',
@@ -40,7 +41,7 @@ describe('/api/notes', ()=> {
     });
 
     test('should resoind with a 400', () => {
-      return superagent.post('http://localhost:7000/api/notes')
+      return superagent.post('http://localhost:7000/api/movies')
       .set('Content-Type', 'application/json')
       .send({
         title: 'hello world',
