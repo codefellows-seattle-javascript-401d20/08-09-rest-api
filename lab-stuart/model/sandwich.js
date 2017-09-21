@@ -5,13 +5,13 @@ const uuid = require('uuid/v1');
 class Sandwich {
   constructor(options){
     this.id = uuid();
-    this.timestamp = new Date();
-    this.title = options.title || '';
-    this.content = options.content || '';
+    this.bread = options.bread || '';
+    this.cheese = options.cheese || '';
+    this.spread = options.spread || '';
   }
 
   toString(){
-    return this.title + '\n' + this.content;
+    return this.bread + '\n' + this.cheese + '\n' + this.spread;
   }
 }
 
