@@ -9,7 +9,7 @@ module.exports = (req) => {
     req.url.query = queryString.parse(req.url.query);
 
     if (!(req.method === 'POST' || req.method === 'PUT'))
-      return resolve();
+      return resolve(req);
 
     let text = ''; // accumulated data chunks
     req.on('data', buffer => {
@@ -19,7 +19,7 @@ module.exports = (req) => {
     req.on('end', () => {
       try {
         req.text = text;
-        if (req.header['content-type'].indexOf('application/json') > -1)
+        if (req.headers['content-type'].indexOf('application/json') > -1)
           req.body = JSON.parse(text);
         resolve(req);
       } catch (err) {
