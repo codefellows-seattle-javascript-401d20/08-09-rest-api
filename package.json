@@ -1,9 +1,10 @@
 {
   "name": "08-09-rest-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 08: REST API ======",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "start": "node index.js",
     "watch": "nodemon index.js",
     "test": "jest -i --coverage",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "dotenv": "^4.0.0",
+    "fs-extra": "^4.0.2",
     "uuid": "^3.1.0"
   }
 }

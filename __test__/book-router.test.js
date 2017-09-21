@@ -1,13 +1,17 @@
 'use strict';
 
 process.env.PORT = 7000;
+process.env.STORAGE_PATH = `${__dirname}/test-storage.json`;
 
-const server = require('../lib/server.js');
+const fs = require('fs-extra');
 const superagent = require('superagent');
+const server = require('../lib/server.js');
 
 describe('/api/books', ()=> {
   beforeAll(server.start);
   afterAll(server.stop);
+
+  afterAll(() => fs.remove(process.env.STORAGE_PATH));
 
   describe('POST /api/books', () => {
     test('should respond with a 200 for a request made with a valid id', () => {
@@ -31,7 +35,7 @@ describe('/api/books', ()=> {
       return superagent.post('http://localhost:7000/api/books')
         .set('Content-Type', 'application/json')
         .send({
-          description: 'First published in 1959, Shirley Jackson\'s The Haunting of Hill House has been hailed as a perfect work of unnerving terror. It is the story of four seekers who arrive at a notoriously unfriendly pile called Hill House: Dr. Montague, an occult scholar looking for solid evidence of a "haunting"; Theodora, his lighthearted assistant; Eleanor, a friendless, fragile young woman well acquainted with poltergeists; and Luke, the future heir of Hill House. At first, their stay seems destined to be merely a spooky encounter with inexplicable phenomena. But Hill House is gathering its powers—and soon it will choose one of them to make its own.',
+          description: 'jnjhbjhbhb',
         })
         .then(Promise.reject)
         .catch(res => {
@@ -43,7 +47,7 @@ describe('/api/books', ()=> {
       return superagent.post('http://localhost:7000/api/books')
         .set('Content-Type', 'application/json')
         .send({
-          author: 'Shirley Jackson',
+          author: 'lol',
         })
         .then(Promise.reject)
         .catch(res => {
