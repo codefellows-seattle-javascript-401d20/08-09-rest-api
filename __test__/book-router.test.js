@@ -1,7 +1,6 @@
 'use strict';
 
-// mock env
-process.env.PORT = 7000;
+require('dotenv').config();
 
 const server = require('../lib/server.js');
 const superagent = require('superagent');
@@ -89,20 +88,11 @@ describe('GET /api/books', () => {
   });
 
   test('should respond with a 404 if a valid request is made with an ID that was not found', () => {
-    return superagent.post('http://localhost:7000/api/books')
-      .set('Content-Type', 'application/json')
-      .send({
-        title: 'The Haunting of Hill House',
-        author: 'Shirley Jackson',
-        description: 'First published in 1959, Shirley Jackson\'s The Haunting of Hill House has been hailed as a perfect work of unnerving terror. It is the story of four seekers who arrive at a notoriously unfriendly pile called Hill House: Dr. Montague, an occult scholar looking for solid evidence of a "haunting"; Theodora, his lighthearted assistant; Eleanor, a friendless, fragile young woman well acquainted with poltergeists; and Luke, the future heir of Hill House. At first, their stay seems destined to be merely a spooky encounter with inexplicable phenomena. But Hill House is gathering its powers—and soon it will choose one of them to make its own.',
-      })
-      .then(res => {
-        return superagent.get(`http://localhost:${process.env.PORT}/api/books`)
-          .query({ id: 'testytesttest' })
-          .then(Promise.reject)
-          .catch(res => {
-            expect(res.status).toEqual(400);
-          });
+    return superagent.get(`http://localhost:${process.env.PORT}/api/books`)
+      .query({ id: 'testytesttest' })
+      .then(Promise.reject)
+      .catch(res => {
+        expect(res.status).toEqual(404);
       });
   });
 });
