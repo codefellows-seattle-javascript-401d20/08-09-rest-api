@@ -1,4 +1,4 @@
-![cf](https://i.imgur.com/7v5ASc8.png) Lab 08: REST API
+![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Persistance
 ======
 
 ## Submission Instructions
