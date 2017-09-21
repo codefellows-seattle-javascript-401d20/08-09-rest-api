@@ -72,7 +72,7 @@ router.put('/api/videogames', (req, res) => {
       queriedVideoGame[0].title = req.body.title;
       queriedVideoGame[0].genre = req.body.genre;
       queriedVideoGame[0].console = req.body.console;
-      
+
       return sendJSON(res, 200, queriedVideoGame[0]);
     }
     return sendStatus(res, 404, 'id did not match any videogame');
