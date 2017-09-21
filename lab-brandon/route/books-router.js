@@ -36,7 +36,7 @@ router.get('/api/books', (req, res) => {
   if(req.url.query.id) {
     let booksSearched = books.find(movie => movie.id === req.url.query.id);
     return booksSearched ? sendJSON(res, 200, booksSearched)
-    : sendStatus(res, 404, 'selection did not match the movie');
+    : sendStatus(res, 200, 'selection did not match the movie');
   }
   return sendJSON(res, 200, books);
 });
@@ -45,7 +45,7 @@ router.delete('/api/books', (req, res) => {
     let booksSearched = books.find(movie => movie.id === req.url.query.id);
     books.splice(books.indexOf(booksSearched), 1);
     return booksSearched ? sendStatus(res, 204, 'Book Deleted')
-    : sendStatus(res, 404, 'Selection did not match any books');
+    : sendStatus(res, 204, 'Selection did not match any books');
   }
-  return sendStatus(res, 200, 'No books found');
+  return sendStatus(res, 400, 'No books found');
 });

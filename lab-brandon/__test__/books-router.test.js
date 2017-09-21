@@ -29,7 +29,7 @@ describe('/api/books', ()=> {
       });
     });
 
-    test('should resoind with a 400', () => {
+    test('should respond with a 400', () => {
       return superagent.post('http://localhost:7000/api/books')
       .set('Content-Type', 'application/json')
       .send({
@@ -41,7 +41,7 @@ describe('/api/books', ()=> {
       });
     });
 
-    test('should resoind with a 400', () => {
+    test('should respond with a 400', () => {
       return superagent.post('http://localhost:7000/api/books')
       .set('Content-Type', 'application/json')
       .send({
