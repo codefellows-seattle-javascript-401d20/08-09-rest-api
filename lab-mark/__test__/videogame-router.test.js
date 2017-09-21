@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.PORT = 3000;
+require('dotenv').config();
 
 const server = require('../lib/server.js');
 const superagent = require('superagent');

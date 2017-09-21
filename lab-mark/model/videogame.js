@@ -6,9 +6,9 @@ class VideoGame {
   constructor(options){
     this.id = uuid();
     this.timestamp = new Date();
-    this.title = options.title || '';
-    this.genre = options.genre || '';
-    this.console = options.console || '';
+    this.title = options.title;
+    this.genre = options.genre;
+    this.console = options.console;
 
   }
 }
