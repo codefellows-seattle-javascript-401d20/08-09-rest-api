@@ -9,6 +9,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest --coverage -i",
+    "watch": "nodemon index.js",
+    "start": "node index.js",
     "test-watch": "jest --watch -i"
   },
   "keywords": [],

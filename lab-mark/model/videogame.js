@@ -2,17 +2,15 @@
 
 const uuid = require('uuid/v1');
 
-class Note {
+class VideoGame {
   constructor(options){
     this.id = uuid();
     this.timestamp = new Date();
     this.title = options.title || '';
-    this.content = options.content || '';
-  }
+    this.genre = options.genre || '';
+    this.console = options.console || '';
 
-  toString(){
-    return this.title + '\n' + this.content;
   }
 }
 
-module.exports = Note;
+module.exports = VideoGame;
