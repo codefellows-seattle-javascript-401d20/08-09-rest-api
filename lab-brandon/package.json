@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "test": "jest -i --coverage"
+    "test": "jest -i --coverage",
   },
   "keywords": [],
   "author": "",
