@@ -2,7 +2,7 @@
 
 const uuid = require('uuid/v1');
 
-class Note {
+class Movie {
   constructor(options){
     this.id = uuid();
     this.timestamp = new Date();
@@ -15,4 +15,4 @@ class Note {
   }
 }
 
-module.exports = Note;
+module.exports = Movie;
