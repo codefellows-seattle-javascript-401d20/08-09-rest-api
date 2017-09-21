@@ -11,7 +11,7 @@ class Book {
   }
 
   toString(){
-    return this.title + '/n' + this.content + '/n' + this.description;
+    return this.title + '/n' + this.author + '/n' + this.description;
   }
 }
 
