@@ -50,16 +50,7 @@ router.get('/api/books', (req, res) => {
       sendStatus(res, 404, 'no ID found');
     }
   }
-  return books;
-  // if(req.url.query.id){
-  //   if (books.find(book => book.id === req.url.query.id)){
-  //     let newBook = books.find(book => book.id === req.url.query.id);
-  //     sendJSON(res, 200, newBook);
-  //   } else {
-  //     return sendStatus(res, 404, 'no ID found');
-  //   }
-  // }
-  // return books;
+  sendJSON(res, 200, books);
 });
 
 // DELETE /api/<resource-name?id={id}>
