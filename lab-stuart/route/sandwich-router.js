@@ -1,9 +1,9 @@
 'use-strict';
 
-const Note = require('../model/note.js');
+const Sandwich = require('../model/sandwich.js');
 const router = require('../lib/router.js');
 
-let notes = [];
+let sandwiches = [];
 
 let sendStatus = (res, status, message) => {
   console.error('::REQUESTS_ERROR::', message);
@@ -18,7 +18,7 @@ let sendJSON = (res, status, data) => {
   res.end(JSON.stringify(data));
 }
 
-router.post('/api/notes', (req, res) => {
+router.post('/api/sandwiches', (req, res) => {
   if(!req.body)
     return sendStatus(res, 400, 'no body found');
   if(!req.body.title)
@@ -26,11 +26,11 @@ router.post('/api/notes', (req, res) => {
   if(!req.body.content)
     return sendStatus(res, 400, 'no content found');
 
-  let note = new Note(req.body);
-  notes.push(note);
-  sendJSON(res, 200, note);
+  let sandwich = new Sandwich(req.body);
+  sandwiches.push(sandwich);
+  sendJSON(res, 200, sandwich);
 })
 
-router.get('/api/notes', (req, res) => {
+router.get('/api/sandwiches', (req, res) => {
   console.log('test')
 })
