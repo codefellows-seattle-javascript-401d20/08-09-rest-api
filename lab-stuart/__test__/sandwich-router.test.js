@@ -11,7 +11,6 @@ describe('/api/sandwiches', ()=> {
   beforeAll(server.start);
   afterAll(server.stop);
 
-  beforeAll(() => fs.writeJSON(process.env.STORAGE_PATH, [{"id":"d5fa26f0-9f3a-11e7-a389-415311809848","bread":"white","cheese":"cheddar","spread":"mayo"}]));
   afterAll(() => fs.remove(process.env.STORAGE_PATH));
 
   describe('POST /api/sandwiches', () => {
@@ -77,10 +76,10 @@ describe('/api/sandwiches', ()=> {
       });
     });
   });
-
-  describe('GET /api/sandwiches?id=d5fa26f0-9f3a-11e7-a389-415311809848', () => {
+  
+  describe(`GET /api/sandwiches?id=validID`, () => {
     test('should return a 200', () => {
-      return superagent.get('http://localhost:6000/api/sandwiches?id=d5fa26f0-9f3a-11e7-a389-415311809848')
+      return superagent.get(`http://localhost:6000/api/sandwiches?id=72e5fa10-9fb9-11e7-8cdb-05ae0ff45435`)
       .then(Promise.reject)
       .catch(res => {
         expect(res.status).toEqual(200);
@@ -88,23 +87,32 @@ describe('/api/sandwiches', ()=> {
     });
   });
 
+  describe('DELETE /api/sandwiches', () => {
+    test('should return a 404', () => {
+      return superagent.delete('http://localhost:6000/api/sandwiches')
+      .catch(res => {
+        expect(res.status).toEqual(400);
+      });
+    });
+  });
+
   describe('DELETE /api/sandwiches?id=none', () => {
     test('should return a 404', () => {
       return superagent.delete('http://localhost:6000/api/sandwiches?id=none')
-      .then(Promise.reject)
       .catch(res => {
         expect(res.status).toEqual(404);
       });
     });
   });
   
-  describe('DELETE /api/sandwiches?id=d5fa26f0-9f3a-11e7-a389-415311809848', () => {
+  describe(`DELETE /api/sandwiches?id=validID`, () => {
     test('should return a 204', () => {
-      return superagent.delete('http://localhost:6000/api/sandwiches?id=d5fa26f0-9f3a-11e7-a389-415311809848')
+      return superagent.delete(`http://localhost:6000/api/sandwiches?id=72e5fa10-9fb9-11e7-8cdb-05ae0ff45435`)
       .then(Promise.reject)
       .catch(res => {
         expect(res.status).toEqual(204);
       });
     });
   });
+  
 });

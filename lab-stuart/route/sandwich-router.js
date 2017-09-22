@@ -2,7 +2,7 @@
 
 const Sandwich = require('../model/sandwich.js');
 const router = require('../lib/router.js');
-const storage = require('../lib/storage.js')
+const storage = require('../lib/storage.js');
 
 let sendStatus = (res, status, message) => {
   if (status === 400)
@@ -41,19 +41,6 @@ router.post('/api/sandwiches', (req, res) => {
     return sendStatus(res, 500)
   })
 });
-
-// router.get('/api/sandwiches', (req, res) => {
-//   if (!sandwiches.length)
-//     return sendStatus(res, 400, 'sandwiches not set');
-//   if (req.url.query.id) {
-//     let sandwichId = req.url.query.id;
-//     let sandwichFilter = sandwiches.filter(sandwich => sandwich.id === sandwichId);
-//     if (sandwichFilter.length > 0)
-//       return sendStatus(res, 200, sandwichFilter[0]);
-//     return sendStatus(res, 404, 'sandwich not found');      
-//   }
-//   return sendStatus(res, 200, sandwiches);
-// });
 
 router.get('/api/sandwiches', (req, res) => {
   if(req.url.query.id){
