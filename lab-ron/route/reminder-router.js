@@ -21,8 +21,6 @@ router.post('/api/reminders', (req, res) => {
     return sendStatus(res, 400, 'no body found');
   if (!req.body.task)
     return sendStatus(res, 400, 'no task found');
-  if (!req.body.done)
-    return sendStatus(res, 400, 'no done property set');
 
   let reminder = new Reminder(req.body);
   reminders.push(reminder);

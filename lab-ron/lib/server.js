@@ -4,6 +4,7 @@ const http = require('http');
 const router = require('./router.js');
 
 require('../route/note-router.js');
+require('../route/reminder-router');
 
 const app = http.createServer(router.route);
 let isOn = false;
