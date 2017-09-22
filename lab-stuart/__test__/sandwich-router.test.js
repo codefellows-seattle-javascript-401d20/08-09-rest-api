@@ -11,6 +11,7 @@ describe('/api/sandwiches', ()=> {
   beforeAll(server.start);
   afterAll(server.stop);
 
+  beforeAll(() => fs.writeJSON(process.env.STORAGE_PATH, [{"id":"d5fa26f0-9f3a-11e7-a389-415311809848","bread":"white","cheese":"cheddar","spread":"mayo"}]));
   afterAll(() => fs.remove(process.env.STORAGE_PATH));
 
   describe('POST /api/sandwiches', () => {
@@ -31,7 +32,7 @@ describe('/api/sandwiches', ()=> {
       });
     });
 
-    test('should resoind with a 400', () => {
+    test('should respond with a 400', () => {
       return superagent.post('http://localhost:6000/api/sandwiches')
       .set('Content-Type', 'application/json')
       .send({
@@ -43,7 +44,7 @@ describe('/api/sandwiches', ()=> {
       });
     });
 
-    test('should resoind with a 400', () => {
+    test('should respond with a 400', () => {
       return superagent.post('http://localhost:6000/api/sandwiches')
       .set('Content-Type', 'application/json')
       .send({
@@ -60,8 +61,19 @@ describe('/api/sandwiches', ()=> {
     test('should return an array', () => {
       return superagent.get('http://localhost:6000/api/sandwiches')
       .then(res => {
+        console.log(res.body)
         expect(res.status).toEqual(200);
         expect(res.body). toBeInstanceOf(Array);
+      });
+    });
+  });
+
+  describe('GET /api/sandwiches?id=none', () => {
+    test('should return a 404', () => {
+      return superagent.get('http://localhost:6000/api/sandwiches?id=none')
+      .then(Promise.reject)
+      .catch(res => {
+        expect(res.status).toEqual(404);
       });
     });
   });
