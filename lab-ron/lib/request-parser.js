@@ -11,7 +11,7 @@ module.exports = (req) => {
     if (!(req.method === 'POST' || req.method === 'PUT'))
       return resolve(req);
 
-    let text = ''; // accumulated data chunks
+    let text = '';
     req.on('data', buffer => {
       text += buffer.toString();
     });
