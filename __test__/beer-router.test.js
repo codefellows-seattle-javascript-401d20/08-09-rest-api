@@ -22,14 +22,15 @@ describe('/api/beers', ()=> {
       return superagent.post('http://localhost:7000/api/beers')
       .set('Content-Type', 'application/json')
       .send({
-        title: 'hello world',
-        content: 'cool beans',
+        title: 'Miller',
+        type: 'lager',
+        abv: '4.2',
       })
       .then(res => {
         expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual('hello world');
-        expect(res.body.content).toEqual('cool beans');
-        expect(res.body.timestamp).toBeTruthy();
+        expect(res.body.title).toEqual('Miller');
+        expect(res.body.type).toEqual('lager');
+        expect(res.body.abv).toBeEqual('4.2');
         expect(res.body.id).toBeTruthy();
       });
     });
@@ -38,7 +39,7 @@ describe('/api/beers', ()=> {
       return superagent.post('http://localhost:7000/api/beers')
       .set('Content-Type', 'application/json')
       .send({
-        content: 'cool beans',
+        type: 'lager',
       })
       .then(Promise.reject)
       .catch(res => {
@@ -50,7 +51,7 @@ describe('/api/beers', ()=> {
       return superagent.post('http://localhost:7000/api/beers')
       .set('Content-Type', 'application/json')
       .send({
-        title: 'hello world',
+        title: 'Miller',
       })
       .then(Promise.reject)
       .catch(res => {
@@ -65,7 +66,7 @@ describe('/api/beers', ()=> {
       .then(res => {
         console.log(res.body);
         expect(res.status).toEqual(200);
-        expect(res.body). toBeInstanceOf(Array);
+        expect(res.body).toBeInstanceOf(Array);
       });
     });
   });

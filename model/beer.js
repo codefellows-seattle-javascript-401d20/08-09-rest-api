@@ -7,7 +7,8 @@ class Beer {
     this.id = uuid();
     this.timestamp = new Date();
     this.title = options.title || '';
-    this.content = options.content || '';
+    this.type = options.type || '';
+    this.abv = options.abv || '';
   }
 }
 
