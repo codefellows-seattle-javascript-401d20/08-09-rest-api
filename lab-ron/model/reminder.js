@@ -6,13 +6,13 @@ class Reminder {
   constructor(options) {
     this.id = uuid();
     this.timestamp = new Date();
-    this.todo = options.todo || '';
-    this.completed = options.completed || false;
+    this.task = options.task || '';
+    this.done = options.done || false;
   }
 
   toString() {
-    let isDone = this.completed ? 'done' : 'incomplete';
-    return this.todo + ' - ' + isDone;
+    let isDone = this.done ? 'done' : 'incomplete';
+    return this.task + ' - ' + isDone;
   }
 }
 
