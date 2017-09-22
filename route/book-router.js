@@ -75,6 +75,7 @@ router.delete('/api/books', (req, res) => {
           return sendStatus(res, 404);
         sendStatus(500);
       });
+  } else {
+    sendStatus(res, 400, 'no ID in query');
   }
-  sendStatus(res, 400, 'no ID in query');
 });
