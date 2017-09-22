@@ -24,7 +24,7 @@ router.post('/api/sandwiches', (req, res) => {
   if(!req.body)
     return sendStatus(res, 400, 'no body found');
   if(!req.body.bread)
-    return sendStatus(res, 400, 'no title bread');
+    return sendStatus(res, 400, 'no content bread');
   if(!req.body.cheese)
     return sendStatus(res, 400, 'no content cheese');
     if(!req.body.spread)
