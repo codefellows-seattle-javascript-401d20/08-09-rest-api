@@ -57,36 +57,35 @@ router.post('/api/sandwiches', (req, res) => {
 
 router.get('/api/sandwiches', (req, res) => {
   if(req.url.query.id){
-    // send one sandwich
     storage.fetchItem(req.url.query.id)
     .then(sandwich => sendJSON(res, 200, sandwich))
     .catch(err => {
-      console.error(err)
+      console.error(err);
       if(err.message.indexOf('not found') > -1)
-        return sendStatus(res, 404)
-      sendStatus(500)
+        return sendStatus(res, 404);
+      sendStatus(500);
     })
   } else {
-    // send all the sandwiches
     storage.fetch()
     .then(sandwiches => sendJSON(res, 200, sandwiches))
     .catch(err => {
-      console.error(err)
-      sendStatus(res, 500)
+      console.error(err);
+      sendStatus(res, 500);
     })
   }
-})
+});
 
 router.delete('/api/sandwiches', (req, res) => {
-  if (req.url.query.id) {
-    let sandwichId = req.url.query.id;
-    let sandwichFilter = sandwiches.filter(sandwich => sandwich.id === sandwichId);
-    if (sandwichFilter.length > 0) {
-      sandwiches = sandwiches.filter(sandwich => sandwich.id !== sandwichId);
-      return sendStatus(res, 204, sandwiches);
-    } else {
-      return sendStatus(res, 404, 'sandwich not found');
-    }  
+  if(req.url.query.id){
+    storage.deleteItem(req.url.query.id)
+    .then(sendStatus(res, 204))
+    .catch(err => {
+      console.error(err);
+      if(err.message.indexOf('not found') > -1)
+        return sendStatus(res, 404, 'sandwich not found');
+      sendStatus(500);
+    })
+  } else {
+    return sendStatus(res, 400, 'sandwich id is required');
   }
-  return sendStatus(res, 400, 'sandwich id is required');
 });

@@ -41,9 +41,11 @@ storage.fetchItem = (id) => {
 }
 
 storage.deleteItem = (id) => {
-  return store.fetch()
+  return storage.fetch()
   .then(items => {
-    return items.filter((item) => item.id !== id);
+    return items.filter((item) => item.id !== id)
   })
-  .then(fs.writeJSON(process.env.STORAGE_PATH, items));
+  .then(items => {
+    return fs.writeJSON(process.env.STORAGE_PATH, items)
+  });
 }
