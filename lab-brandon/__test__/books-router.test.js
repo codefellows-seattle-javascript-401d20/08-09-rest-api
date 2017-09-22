@@ -30,10 +30,12 @@ describe('/api/books', ()=> {
     });
 
     test('should respond with a 400', () => {
-      return superagent.post('http://localhost:7000/api/books')
+      return superagent.post(`http://localhost:${process.env.PORT}/api/books`)
       .set('Content-Type', 'application/json')
       .send({
-        content: 'cool beans',
+        title: 'Ender\'s Game',
+        author: 'Orson Scott Card',
+        mainCharacter: 'Ender',
       })
       .then(Promise.reject)
       .catch(res => {
@@ -41,15 +43,15 @@ describe('/api/books', ()=> {
       });
     });
 
-    test('should respond with a 400', () => {
-      return superagent.post('http://localhost:7000/api/books')
+    test('should respond with a 404', () => {
+      return superagent.post(`http://localhost:${process.env.PORT}/api/CHEESEHEAD`)
       .set('Content-Type', 'application/json')
       .send({
         title: 'hello world',
       })
       .then(Promise.reject)
       .catch(res => {
-        expect(res.status).toEqual(400);
+        expect(res.status).toEqual(404);
       });
     });
   });
