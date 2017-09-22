@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config();
+process.env.PORT = 3000;
 
 const server = require('../lib/server.js');
 const superagent = require('superagent');
@@ -115,19 +115,19 @@ describe('/api/videogames', ()=> {
           expect(res.status).toEqual(400);
         });
     });
-  });
 
-  test('should respond with a 400 no console', () => {
-    return superagent.post(`http://localhost:${process.env.PORT}/api/videogames`)
-      .set('Content-Type', 'application/json')
-      .send({
-        title: 'The Last of Us',
-        genre: 'action',
-      })
-      .then(Promise.reject)
-      .catch(res => {
-        expect(res.status).toEqual(400);
-      });
+    test('should respond with a 400 no console', () => {
+      return superagent.post(`http://localhost:${process.env.PORT}/api/videogames`)
+        .set('Content-Type', 'application/json')
+        .send({
+          title: 'The Last of Us',
+          genre: 'action',
+        })
+        .then(Promise.reject)
+        .catch(res => {
+          expect(res.status).toEqual(400);
+        });
+    });
   });
 
   describe('GET /api/videogames', () => {
@@ -217,24 +217,25 @@ describe('/api/videogames', ()=> {
           expect(res.status).toEqual(404);
         });
     });
+
+    test('Should not be able to delete all', () => {
+      return superagent.delete(`http://localhost:${process.env.PORT}/api/videogames`)
+        .then(Promise.reject)
+        .catch(res => {
+          expect(res.status).toEqual(400);
+        });
+    });
+
+    test('invalid ID', () => {
+      return superagent.delete(`http://localhost:${process.env.PORT}/api/videogames`)
+        .query({ id: 521255125152 })
+        .then(Promise.reject)
+        .catch(res => {
+          expect(res.status).toEqual(404);
+        });
+    });
   });
 
-  test('Should not be able to delete all', () => {
-    return superagent.delete(`http://localhost:${process.env.PORT}/api/videogames`)
-      .then(Promise.reject)
-      .catch(res => {
-        expect(res.status).toEqual(400);
-      });
-  });
-
-  test('invalid ID', () => {
-    return superagent.delete(`http://localhost:${process.env.PORT}/api/videogames`)
-      .query({ id: 521255125152 })
-      .then(Promise.reject)
-      .catch(res => {
-        expect(res.status).toEqual(404);
-      });
-  });
 
   test('should respond with a 200, update with ID', () => {
     return superagent.post(`http://localhost:${process.env.PORT}/api/videogames`)

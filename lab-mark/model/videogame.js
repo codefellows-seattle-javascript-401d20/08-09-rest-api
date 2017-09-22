@@ -9,7 +9,6 @@ class VideoGame {
     this.title = options.title;
     this.genre = options.genre;
     this.console = options.console;
-
   }
 }
 
