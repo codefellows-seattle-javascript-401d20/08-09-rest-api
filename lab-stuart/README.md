@@ -1,1 +1,1 @@
-## Lab 07 - Vanilla HTTP Server
+## Lab 08 - REST API
