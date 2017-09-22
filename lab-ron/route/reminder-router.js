@@ -51,3 +51,16 @@ router.get('/api/reminders', (req, res) => {
       });
   }
 });
+
+router.delete('/api/reminders', (req, res) => {
+  if (req.url.query.id) {
+    storage.deleteItem(req.url.query.id)
+      .then(Reminder => sendJSON(res, 200, Reminder))
+      .catch(err => {
+        console.error(err);
+        if (err.message.indexOf('not found') > -1)
+          return sendStatus(res, 404);
+        sendStatus(500);
+      });
+  } 
+});
