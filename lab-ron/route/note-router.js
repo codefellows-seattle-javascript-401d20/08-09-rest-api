@@ -20,8 +20,8 @@ let sendJSON = (res, status, data) => {
 
 router.post('/api/notes', (req, res) => {
   if (!req.body) return sendStatus(res, 400, 'no body found');
-  if (!req.title) return sendStatus(res, 400, 'no title found');
-  if (!req.content) return sendStatus(res, 400, 'no content found');
+  if (!req.body.title) return sendStatus(res, 400, 'no title found');
+  if (!req.body.content) return sendStatus(res, 400, 'no content found');
 
   let note = new Note(req.body);
   notes.push(note);

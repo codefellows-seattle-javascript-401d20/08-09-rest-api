@@ -4,8 +4,9 @@ const http = require('http');
 const router = require('./router.js');
 
 require('../route/note-router.js');
+require('../route/reminder-router');
 
-const app = http.createClient(router.route);
+const app = http.createServer(router.route);
 let isOn = false;
 
 module.exports = {
@@ -13,6 +14,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
       if (isOn)
         return reject(new Error('__SERVER_ERROR__: server is already running'));
+      if (!process.env.PORT)
+        return reject(new Error('__ENV_ERROR__: process.env.PORT must be set'));
       app.listen(process.env.PORT, (err) => {
         if (err) return reject(err);
         isOn = true;

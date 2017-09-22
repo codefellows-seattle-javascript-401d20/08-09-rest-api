@@ -1,6 +1,6 @@
 'use strict';
 
-const requestParser = require('./request-parser');
+const requestParser = require('./request-parser.js');
 
 let routeHandlers = {
   POST: {},
