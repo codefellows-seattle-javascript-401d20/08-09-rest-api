@@ -3,10 +3,8 @@
 const http = require('http');
 const router = require('./router.js');
 
-// register routes
 require('../route/videogame-router.js');
 
-// add router to server
 const app = http.createServer(router.route);
 let isOn = false;
 
