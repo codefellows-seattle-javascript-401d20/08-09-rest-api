@@ -57,7 +57,7 @@ router.get('/api/books', (req, res) => {
   } else {
     // send all the books
     storage.fetch()
-      .then(notes => sendJSON(res, 200, notes))
+      .then(books => sendJSON(res, 200, books))
       .catch(err => {
         console.error(err);
         sendStatus(res, 500);
@@ -65,21 +65,16 @@ router.get('/api/books', (req, res) => {
   }
 });
 
-// DELETE /api/<resource-name?id={id}>
-// the route should delete a note with the given id
-// on success this should return a 204 status code with no content in the body
-// on failure due to lack of id in the query respond with a 400 status code
-// on failure due to a resouce with that id not existing respond with a 404 status code
-// router.delete('/api/books', (req, res) => {
-//   if(req.url.query.id){
-//     let index = books.indexof(req.url.query.id);
-//     books.splice(index, index);
-//     if(!books.indexof(req.url.query.id)){
-//       return sendStatus(res, 204, 'no body found');
-//     }
-//   }
-//   if(!req.url.query.id){
-//     sendStatus(res, 400, 'no ID found');
-//   }
-//   return sendStatus(res, 404, 'no body found');
-// });
+router.delete('/api/books', (req, res) => {
+  if(req.url.query.id){
+    storage.removeItem(req.url.query.id)
+      .then(sendStatus(res, 204))
+      .catch(err => {
+        console.error(err);
+        if(err.message.indexOf('not found') > -1)
+          return sendStatus(res, 404);
+        sendStatus(500);
+      });
+  }
+  sendStatus(res, 400, 'no ID in query');
+});
