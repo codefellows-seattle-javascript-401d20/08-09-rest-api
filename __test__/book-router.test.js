@@ -11,7 +11,8 @@ describe('/api/books', ()=> {
   beforeAll(server.start);
   afterAll(server.stop);
 
-  afterAll(() => fs.remove(process.env.STORAGE_PATH));
+  // Uncomment the line below to remove the JSON file after creating it
+  // afterAll(() => fs.remove(process.env.STORAGE_PATH));
 
   describe('POST /api/books', () => {
     test('should respond with a 200 for a request made with a valid id', () => {
