@@ -38,7 +38,7 @@ router.post('/api/notes', (req, res) => {
 
 router.get('/api/notes', (req, res) => {
   if (req.url.query.id) {
-    storage.fetchItem()(req.url.query.id)
+    storage.fetchItem(req.url.query.id)
       .then(note => sendJSON(res, 200, note))
       .catch(err => {
         console.error(err);
