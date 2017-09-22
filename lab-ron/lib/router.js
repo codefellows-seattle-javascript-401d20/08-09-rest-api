@@ -13,7 +13,6 @@ let routeHandlers = {
   HEAD: {},
 };
 
-
 module.exports = {
   get: (url, callback) => {
     routeHandlers.GET[url] = callback;

@@ -67,3 +67,5 @@ tags
 ###### Personal
 .tern-project
 .env
+data.json
+test-data.json
