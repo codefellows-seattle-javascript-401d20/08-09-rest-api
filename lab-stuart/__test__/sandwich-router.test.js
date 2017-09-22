@@ -6,6 +6,14 @@ process.env.STORAGE_PATH = `${__dirname}/test-storage.json`;
 const fs = require('fs-extra');
 const superagent = require('superagent');
 const server = require('../lib/server.js');
+const storage = require('../lib/storage.js');
+const Sandwich = require('../model/sandwich.js');
+
+let createMockSandwich = () => storage.setItem(new Sandwich({
+  bread: 'White',
+  cheese: 'American', 
+  spread: 'Miracle Whip',
+}));
 
 describe('/api/sandwiches', ()=> {
   beforeAll(server.start);
@@ -67,9 +75,9 @@ describe('/api/sandwiches', ()=> {
     });
   });
 
-  describe('GET /api/sandwiches?id=none', () => {
+  describe('GET /api/sandwiches?id=invalid', () => {
     test('should return a 404', () => {
-      return superagent.get('http://localhost:6000/api/sandwiches?id=none')
+      return superagent.get('http://localhost:6000/api/sandwiches?id=invalid')
       .then(Promise.reject)
       .catch(res => {
         expect(res.status).toEqual(404);
@@ -79,26 +87,40 @@ describe('/api/sandwiches', ()=> {
   
   describe(`GET /api/sandwiches?id=validID`, () => {
     test('should return a 200', () => {
-      return superagent.get(`http://localhost:6000/api/sandwiches?id=72e5fa10-9fb9-11e7-8cdb-05ae0ff45435`)
-      .then(Promise.reject)
-      .catch(res => {
+      let mockSandwich;
+      return createMockSandwich()
+      .then(sandwich => {
+        mockSandwich = sandwich
+        return superagent.get(`http://localhost:6000/api/sandwiches`)
+          .query({ id: sandwich.id });
+      })
+      .then(res => {
         expect(res.status).toEqual(200);
+        expect(res.body.id).toEqual(mockSandwich.id);
       });
     });
   });
 
   describe('DELETE /api/sandwiches', () => {
-    test('should return a 404', () => {
+    test('should return a 400', () => {
       return superagent.delete('http://localhost:6000/api/sandwiches')
+      .then(Promise.reject)
       .catch(res => {
         expect(res.status).toEqual(400);
       });
     });
   });
 
-  describe('DELETE /api/sandwiches?id=none', () => {
+  describe('DELETE /api/sandwiches?id=invalid', () => {
     test('should return a 404', () => {
-      return superagent.delete('http://localhost:6000/api/sandwiches?id=none')
+      let mockSandwich;
+      return createMockSandwich()
+      .then(sandwich => {
+        mockSandwich = sandwich
+        return superagent.get(`http://localhost:6000/api/sandwiches`)
+          .query({ id: 0 });
+      })
+      .then(Promise.reject)
       .catch(res => {
         expect(res.status).toEqual(404);
       });
@@ -106,10 +128,13 @@ describe('/api/sandwiches', ()=> {
   });
   
   describe(`DELETE /api/sandwiches?id=validID`, () => {
-    test('should return a 204', () => {
-      return superagent.delete(`http://localhost:6000/api/sandwiches?id=72e5fa10-9fb9-11e7-8cdb-05ae0ff45435`)
-      .then(Promise.reject)
-      .catch(res => {
+    test('should respond with a 200 response', () => {
+      return createMockSandwich()
+      .then(sandwich => {
+        return superagent.delete(`http://localhost:6000/api/sandwiches`)
+          .query({ id: sandwich.id });
+      })
+      .then(res => {
         expect(res.status).toEqual(204);
       });
     });
