@@ -1,7 +1,7 @@
 'use strict';
 
 process.env.PORT = 3000;
-process.env.STORAGE_PATH = '/home/mackoy/codefellows/401/08-09-rest-api/lab-mark/data/storageTEST.json';
+process.env.STORAGE_PATH = '/home/mark/codefellows/401/08-09-rest-api/lab-mark/data/storageTEST.json';
 
 const fs = require('fs-extra');
 const server = require('../lib/server.js');
@@ -254,12 +254,12 @@ describe('/api/videogames', ()=> {
         })
         .then(res => {
           return superagent.put(`http://localhost:${process.env.PORT}/api/videogames`)
-            .query({ id: res.body.id })
             .set('Content-Type', 'application/json')
             .send({
               title: 'Portal',
               genre: 'puzzle',
               console: 'pc',
+              id: res.body.id,
             });
         })
         .then(res => {
@@ -354,12 +354,12 @@ describe('/api/videogames', ()=> {
 
     test('invalid ID', () => {
       return superagent.put(`http://localhost:${process.env.PORT}/api/videogames`)
-        .query({ id: 12345 })
         .set('Content-Type', 'application/json')
         .send({
           title: 'Portal',
           genre: 'puzzle',
           console: 'pc',
+          id: 12345,
         })
         .then(Promise.reject)
         .catch(res => {

@@ -90,15 +90,14 @@ router.put('/api/videogames', (req, res) => {
     return sendStatus(res, 400, 'no genre found');
   if(!req.body.console)
     return sendStatus(res, 400, 'no console found');
+  if(!req.body.id)
+    return sendStatus(res, 400, 'request must have id');
 
-  if(req.url.query.id) {
-    storage.updateItem(req.url.query.id, req.body)
-      .then(() => sendStatus(res, 200, 'videogame updated'))
-      .catch(err => {
-        if(err.message.indexOf('not found') > -1)
-          return sendStatus(res, 404, 'id did not match any videogame');
-        sendStatus(res, 500);
-      });
-  }
-  return sendStatus(res, 400, 'request must have ID');
+  storage.updateItem(req.body)
+    .then(() => sendStatus(res, 200, 'videogame updated'))
+    .catch(err => {
+      if(err.message.indexOf('not found') > -1)
+        return sendStatus(res, 404, 'id did not match any videogame');
+      sendStatus(res, 500);
+    });
 });

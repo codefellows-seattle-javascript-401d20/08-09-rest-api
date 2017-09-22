@@ -15,8 +15,6 @@ storage.fetch = () => {
 };
 
 storage.setItem = (item) => {
-  if(!item.id)
-    return Promise.reject(new Error('__STORAGE_ERROR__ item must have an id'));
   return storage.fetch()
     .then(items => {
       return fs.writeJSON(process.env.STORAGE_PATH, [...items, item]);
@@ -45,15 +43,16 @@ storage.deleteItem = (id) => {
     .then(items => fs.writeJSON(process.env.STORAGE_PATH, items));
 };
 
-storage.updateItem = (id, body) => {
+storage.updateItem = (body) => {
   let videogame;
   return storage.fetch()
     .then(items => {
-      if(items.find(item => item.id === id)) {
-        videogame = items.filter((item) => item.id === id);
+      if(items.find(item => item.id === body.id)) {
+        videogame = items.filter((item) => item.id === body.id);
         videogame[0].title = body.title;
         videogame[0].genre = body.genre;
         videogame[0].console = body.console;
+        videogame[0].timestamp = new Date();
         return items;
       }
       throw new Error('__STORAGE_ERROR__ item not found');
