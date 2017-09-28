@@ -116,7 +116,7 @@ describe('/api/sandwiches', ()=> {
       let mockSandwich;
       return createMockSandwich()
       .then(sandwich => {
-        mockSandwich = sandwich
+        mockSandwich = sandwich;
         return superagent.get(`http://localhost:6000/api/sandwiches`)
           .query({ id: 0 });
       })

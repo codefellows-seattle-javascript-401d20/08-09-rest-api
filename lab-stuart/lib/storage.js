@@ -19,7 +19,8 @@ storage.setItem = (item) => {
   if (!item.id) {
     return Promise.reject(new Error('__STORAGE_ERROR__ item must have an id'));
   }
-  return storage.fetch().then(items => {
+  return storage.fetch()
+  .then(items => {
     return fs.writeJSON(process.env.STORAGE_PATH, [...items, item]);
   }).then(() => item);
 }
@@ -43,9 +44,11 @@ storage.fetchItem = (id) => {
 storage.deleteItem = (id) => {
   return storage.fetch()
   .then(items => {
+    console.log(items)
     return items.filter((item) => item.id !== id)
   })
   .then(items => {
+    console.log(items)
     return fs.writeJSON(process.env.STORAGE_PATH, items)
   });
 }
