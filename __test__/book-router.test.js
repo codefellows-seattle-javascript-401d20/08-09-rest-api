@@ -11,7 +11,7 @@ describe('/api/books', ()=> {
   beforeAll(server.start);
   afterAll(server.stop);
 
-  // Uncomment the line below to remove the JSON file after creating it
+  // uncomment the line below to remove the JSON file after creating it
   // afterAll(() => fs.remove(process.env.STORAGE_PATH));
 
   describe('POST /api/books', () => {
