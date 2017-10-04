@@ -1,0 +1,35 @@
+{
+  "name": "08-09-rest-api",
+  "version": "0.0.1",
+  "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 08: REST API ======",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test": "jest -i --coverage",
+    "test-watch": "jest -i --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KatherineHanson/08-09-rest-api.git"
+  },
+  "keywords": [],
+  "author": "katherinemariehanson@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KatherineHanson/08-09-rest-api/issues"
+  },
+  "homepage": "https://github.com/KatherineHanson/08-09-rest-api#readme",
+  "devDependencies": {
+    "eslint": "^4.7.1",
+    "jest": "^21.1.0",
+    "nodemon": "^1.12.1",
+    "superagent": "^3.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "fs-extra": "^4.0.2",
+    "uuid": "^3.1.0"
+  }
+}
