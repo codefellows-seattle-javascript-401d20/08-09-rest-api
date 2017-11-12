@@ -27,7 +27,6 @@ module.exports = {
     routeHandlers.DELETE[url] = callback;
   },
   route: (req, res) => {
-    console.log(routeHandlers);
     requestParser(req)
       .then(req => {
         let handler = routeHandlers[req.method][req.url.pathname];
@@ -38,7 +37,7 @@ module.exports = {
         res.end();
       })
       .catch(err => {
-        console.error('__REQUEST_ERROR__:', err);
+        console.error('__REQUEST_ERROR__:', err.message);
         res.writeHead(400);
         res.end();
       });
