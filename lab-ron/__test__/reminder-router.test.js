@@ -41,9 +41,11 @@ describe('/api/reminders', () => {
     });
   });
 
+  
 
   describe('GET /api/reminders', () => {
-    test('should respond with 200', () => {
+
+    test('should respond with 200 and a single item', () => {
       return superagent.post(`${path}/api/reminders`)
         .set('Content-Type', 'application/json')
         .send({
@@ -56,6 +58,34 @@ describe('/api/reminders', () => {
           expect(res.status).toEqual(200);
           expect(res.body.task).toEqual('Take a Shower');
           expect(res.body.id).toBeTruthy();
+        });
+    });
+
+    test('should respond with 200 and a multiple items', () => {
+      return superagent.post(`${path}/api/reminders`)
+        .set('Content-Type', 'application/json')
+        .send({
+          task: 'Take a Shower',
+        })
+        .then(()=>{
+          return superagent.post(`${path}/api/reminders`)
+            .set('Content-Type', 'application/json')
+            .send({
+              task: 'Walk the dog',
+            });
+        })
+        .then(()=>{
+          return superagent.post(`${path}/api/reminders`)
+            .set('Content-Type', 'application/json')
+            .send({
+              task: 'Buy groceries',
+            });
+        })
+        .then(() => superagent.get(`${path}/api/reminders`))
+        .then(res => {
+          expect(res.body.length).toBeGreaterThan(1);
+          expect(res.status).toEqual(200);
+          expect(res.body).toBeInstanceOf(Array);
         });
     });
 
@@ -74,4 +104,5 @@ describe('/api/reminders', () => {
         });
     });
   });
+
 });
