@@ -12,11 +12,11 @@
 * [node uuid docs](https://github.com/kelektiv/node-uuid)
 
 ## Configuration 
-Configure the root of your repository with the following files and directories. Thoughfully name and organize any aditional configuration or module files.
+Configure the root of your repository with the following files and directories. Thoughtfully name and organize any additional configuration or module files.
 * **README.md** - contains documentation
 * **.env** - contains env variables **(should be git ignored)**
 * **.gitignore** - contains a [robust](http://gitignore.io) `.gitignore` file 
-* **.eslintrc** - contains the course linter configuratoin
+* **.eslintrc.json** - contains the course linter configuration
 * **.eslintignore** - contains the course linter ignore configuration
 * **package.json** - contains npm package config
   * create a `lint` script for running eslint
@@ -34,10 +34,10 @@ For this assignment you will be building a RESTful HTTP server. The server will 
 The request parser module should return a promise that parses the request url, querystring, and  POST or PUT body (as JSON).
 
 #### Model
-In the model/ directory create a constructor for a resource (that is different from the class lecture resource). The model must include 4 properties, including an `id` property genorated using node uuid.
+In the model/ directory create a constructor for a resource (that is different from the class lecture resource). The model must include 4 properties, including an `id` property generated using node uuid.
 
 #### Server Endpoints
-Create the following routes for performing CRUD opperations on your resourcee
+Create the following routes for performing CRUD operations on your resource
 * `POST /api/<resource-name>` 
   * pass data as stringifed JSON in the body of a **POST** request to create a new resource
   * on success respond with a 200 status code and the created note 
@@ -50,7 +50,7 @@ Create the following routes for performing CRUD opperations on your resourcee
   * the route should delete a note with the given id 
   * on success this should return a 204 status code with no content in the body
   * on failure due to lack of id in the query respond with a 400 status code
-  * on failure due to a resouce with that id not existing respond with a 404 status code
+  * on failure due to a resource with that id not existing respond with a 404 status code
 
 ## Tests
 * Write tests to ensure the `/api/resource-name` endpoint responds as described for each condition below:
