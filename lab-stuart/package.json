@@ -1,0 +1,28 @@
+{
+  "name": "lab-stuart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test": "jest -i --coverage",
+    "test-watch": "jest -i --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "fs-extra": "^4.0.2",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^21.1.0",
+    "nodemon": "^1.12.1",
+    "superagent": "^3.6.0"
+  }
+}
